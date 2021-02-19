@@ -5,6 +5,8 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import what.the.mvvm.model.DataModel
+import what.the.mvvm.model.DataModelImpl
 import what.the.mvvm.model.service.KakaoSearchService
 import what.the.mvvm.viewmodel.MainViewModel
 
@@ -25,6 +27,12 @@ var viewModelPart = module {
     }
 }
 
+var modelPart = module {
+    factory<DataModel> {
+        DataModelImpl(get())
+    }
+}
+
 var retrofitPart = module {
     single<KakaoSearchService> {
         Retrofit.Builder()
@@ -36,4 +44,4 @@ var retrofitPart = module {
     }
 }
 
-var myDiModule = listOf(viewModelPart)
+var myDiModule = listOf(viewModelPart, modelPart, retrofitPart)
