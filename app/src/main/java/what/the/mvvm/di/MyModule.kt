@@ -2,6 +2,10 @@ package what.the.mvvm.di
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import what.the.mvvm.model.service.KakaoSearchService
 import what.the.mvvm.viewmodel.MainViewModel
 
 /**
@@ -18,6 +22,17 @@ import what.the.mvvm.viewmodel.MainViewModel
 var viewModelPart = module {
     viewModel {
         MainViewModel()
+    }
+}
+
+var retrofitPart = module {
+    single<KakaoSearchService> {
+        Retrofit.Builder()
+            .baseUrl("https://dapi.kakao.com")
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(KakaoSearchService::class.java)
     }
 }
 
