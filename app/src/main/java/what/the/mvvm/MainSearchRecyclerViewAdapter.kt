@@ -13,22 +13,39 @@ import what.the.mvvm.databinding.ItemMainImageBinding
  * Created by jongkook on 2021.02.24
  */
 
-class MainSearchRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainSearchRecyclerViewAdapter :
+    RecyclerView.Adapter<MainSearchRecyclerViewAdapter.ImageHolder>() {
+
+    private val TAG = this.javaClass.simpleName
 
     data class ImageItem(var imageUrl: String, var documentUrl: String)
 
-    class ImageHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_main_image, parent, false)
-    ) {
-        private val binding = ItemMainImageBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
+    private val imageItemList = ArrayList<ImageItem>()
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
+        val binding =
+            ItemMainImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ImageHolder(binding)
+    }
+
+    override fun getItemCount() = imageItemList.size
+
+    override fun onBindViewHolder(holder: ImageHolder, position: Int) {
+        (holder as? ImageHolder)?.onBind(imageItemList[position])
+    }
+
+    fun addImageItem(imageUrl: String, documentUrl: String) {
+        imageItemList.add(ImageItem(imageUrl, documentUrl))
+    }
+
+    class ImageHolder(private val binding: ItemMainImageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: ImageItem) {
-
             itemView.run {
-                Picasso.get().load(item.imageUrl)
-                    .placeholder(R.drawable.ic_image_black_24dp).into(binding.itemMainImageView)
+                Picasso.get()
+                    .load(item.imageUrl)
+                    .error(R.drawable.ic_error_64)
+                    .placeholder(R.drawable.ic_image_black_24dp)
+                    .into(binding.itemMainImageView)
 
                 binding.itemMainImageView.setOnClickListener {
                     ContextCompat.startActivity(
@@ -40,19 +57,4 @@ class MainSearchRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHold
             }
         }
     }
-
-    private val imageItemList = ArrayList<ImageItem>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ImageHolder(parent)
-
-    override fun getItemCount() = imageItemList.size
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as? ImageHolder)?.onBind(imageItemList[position])
-    }
-
-    fun addImageItem(imageUrl: String, documentUrl: String) {
-        imageItemList.add(ImageItem(imageUrl, documentUrl))
-    }
-
 }
