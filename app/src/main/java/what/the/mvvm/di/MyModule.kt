@@ -23,7 +23,7 @@ import what.the.mvvm.viewmodel.MainViewModel
  */
 var viewModelPart = module {
     viewModel {
-        MainViewModel()
+        MainViewModel(get())
     }
 }
 
