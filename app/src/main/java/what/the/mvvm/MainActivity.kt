@@ -1,5 +1,7 @@
 package what.the.mvvm
 
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import what.the.mvvm.base.BaseKotlinActivity
 import what.the.mvvm.databinding.ActivityMainBinding
@@ -14,15 +16,29 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
     // 해결책 : import org.koin.androidx.viewmodel.ext.android.viewModel
     override val viewModel: MainViewModel by viewModel()
 
+    // todo : mainSearchRecyclerViewAdapter
+
     override fun initStartView() {
-        TODO("Not yet implemented")
+        binding.mainActivitySearchRecyclerView.run {
+            layoutManager = StaggeredGridLayoutManager(3, 1).apply {
+                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+                orientation = StaggeredGridLayoutManager.VERTICAL
+            }
+            setHasFixedSize(true)
+        }
     }
 
     override fun initDataBinding() {
-        TODO("Not yet implemented")
+        viewModel.imageSearchResponseLiveData.observe(this, Observer {
+            it.documents.forEach { document ->
+                // todo : mainSearchRecyclerViewAdapter
+            }
+        })
     }
 
     override fun initAfterBinding() {
-        TODO("Not yet implemented")
+        binding.mainActivitySearchButton.setOnClickListener {
+            viewModel.getImageSearch(binding.mainActivitySearchTextView.text.toString(), 1, 80)
+        }
     }
 }

@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 abstract class BaseKotlinActivity<T : ViewDataBinding, R : BaseKotlinViewModel> :
     AppCompatActivity() {
 
-    lateinit var viewDataBinding: T
+    lateinit var binding: T
 
     /**
      * setContentView로 호출할 Layout의 리소스 Id.
@@ -52,7 +52,7 @@ abstract class BaseKotlinActivity<T : ViewDataBinding, R : BaseKotlinViewModel> 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewDataBinding = DataBindingUtil.setContentView(this, layoutResourceId)
+        binding = DataBindingUtil.setContentView(this, layoutResourceId)
 
         snackbarObserving()
         initStartView()
