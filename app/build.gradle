@@ -64,6 +64,7 @@ dependencies {
     // koin
     implementation "org.koin:koin-androidx-scope:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    testImplementation "org.koin:koin-test:$koinVersion"
 
     // picasso
     implementation "com.squareup.picasso:picasso:$picassoVersion"
