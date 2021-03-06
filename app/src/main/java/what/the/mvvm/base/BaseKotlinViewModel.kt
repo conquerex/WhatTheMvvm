@@ -1,11 +1,9 @@
 package what.the.mvvm.base
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
-import what.the.mvvm.util.SingleLiveEvent
 import what.the.mvvm.util.SnackbarMessage
 import what.the.mvvm.util.SnackbarMessageString
 
