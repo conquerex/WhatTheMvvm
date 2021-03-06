@@ -1,5 +1,10 @@
 package what.the.mvvm.di
 
+import com.orhanobut.logger.Logger
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONException
+import org.json.JSONObject
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -36,10 +41,23 @@ var modelPart = module {
 
 var retrofitPart = module {
     single<KakaoSearchService> {
+
+        val client = OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor(
+            HttpLoggingInterceptor.Logger {
+                try {
+                    JSONObject(it)
+                    Logger.t("INTERCEPTOR").json(it)
+                } catch (error: JSONException) {
+                    Logger.t("INTERCEPTOR").i(it)
+                }
+            }
+        ).setLevel(HttpLoggingInterceptor.Level.BODY)).build()
+
         Retrofit.Builder()
             .baseUrl("https://dapi.kakao.com")
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
             .build()
             .create(KakaoSearchService::class.java)
     }
