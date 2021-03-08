@@ -1,7 +1,5 @@
 package what.the.mvvm
 
-import android.os.Handler
-import android.os.Looper
 import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import org.koin.android.ext.android.inject
@@ -50,8 +48,6 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
             mainSearchRecyclerViewAdapter.notifyDataSetChanged()
         })
     }
-
-    var count = 0
 
     override fun initAfterBinding() {
         binding.mainActivitySearchButton.setOnClickListener {

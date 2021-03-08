@@ -11,9 +11,11 @@ import what.the.mvvm.model.response.ImageSearchResponse.Document
 @BindingAdapter("bindData")
 fun bindRecyclerView(
     recyclerView: RecyclerView?,
-    data: Document?
+    data: ArrayList<Document>?
 ) {
     val adapter = recyclerView?.adapter as MainSearchRecyclerViewAdapter
-    data?.let { adapter.addPersonItem(it.doc_url) }
+    data?.forEach {
+        adapter.addPersonItem(it.doc_url)
+    }
     adapter.notifyDataSetChanged()
 }
