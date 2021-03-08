@@ -1,8 +1,8 @@
 package what.the.mvvm
 
+import android.os.Handler
+import android.os.Looper
 import android.view.inputmethod.InputMethodManager
-import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,19 +36,10 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-    @BindingAdapter("bindData")
-    fun bindRecyclerView(
-        recyclerView: RecyclerView,
-        data: String
-    ) {
-        mainSearchRecyclerViewAdapter.addPersonItem(data)
-        mainSearchRecyclerViewAdapter.notifyDataSetChanged()
-    }
-
     override fun initDataBinding() {
         viewModel.imageSearchResponseLiveData.observe(this, {
             mainSearchRecyclerViewAdapter.clearList()
-            it.documents.forEach { document ->
+            it.forEach { document ->
                 mainSearchRecyclerViewAdapter.addImageItem(document.image_url, document.doc_url)
             }
             mainSearchRecyclerViewAdapter.notifyDataSetChanged()
@@ -63,6 +54,7 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
 
         binding.mainActivityAddButton.setOnClickListener {
             viewModel.addPersonImage()
+//            Handler(Looper.getMainLooper()).postDelayed({}, 2000)
         }
     }
 

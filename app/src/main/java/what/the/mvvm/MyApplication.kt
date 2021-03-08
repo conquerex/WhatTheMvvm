@@ -31,7 +31,6 @@ class MyApplication : Application() {
                 return BuildConfig.DEBUG
             }
         })
-        Logger.d("hello")
 
         // 모듈 등록
         startKoin {
