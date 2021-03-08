@@ -2,7 +2,6 @@ package what.the.mvvm.util
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.orhanobut.logger.Logger
 import what.the.mvvm.MainSearchRecyclerViewAdapter
 import what.the.mvvm.model.response.ImageSearchResponse.Document
 
@@ -14,8 +13,7 @@ fun bindRecyclerView(
     recyclerView: RecyclerView?,
     data: Document?
 ) {
-    Logger.d("* * * BindingAdapter")
     val adapter = recyclerView?.adapter as MainSearchRecyclerViewAdapter
-    data?.let { adapter.addPersonItem(it.image_url) }
+    data?.let { adapter.addPersonItem(it.doc_url) }
     adapter.notifyDataSetChanged()
 }

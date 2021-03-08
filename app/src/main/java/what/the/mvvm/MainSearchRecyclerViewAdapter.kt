@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -65,11 +66,15 @@ class MainSearchRecyclerViewAdapter :
                 }
 
                 binding.itemMainImageView.setOnClickListener {
-                    ContextCompat.startActivity(
-                        context,
-                        Intent(Intent.ACTION_VIEW, Uri.parse(item.documentUrl)),
-                        null
-                    )
+                    if (item.documentUrl.length > 5) {
+                        ContextCompat.startActivity(
+                            context,
+                            Intent(Intent.ACTION_VIEW, Uri.parse(item.documentUrl)),
+                            null
+                        )
+                    } else {
+                        Toast.makeText(context, "... Empty ...", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

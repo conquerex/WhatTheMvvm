@@ -3,7 +3,6 @@ package what.the.mvvm.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.orhanobut.logger.Logger
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import what.the.mvvm.base.BaseKotlinViewModel
@@ -28,17 +27,9 @@ class MainViewModel(private val model: DataModel) : BaseKotlinViewModel() {
     val personData: LiveData<Document>
         get() = _personData
 
-    fun addPersonImage(count: Int) {
-        if (_personData.value == null) {
-            Logger.d("* * * _personData NULL")
-        }
-        Logger.d("* * * addPersonImage $count")
-//        personData.value = "https://devvkkid.tistory.com/"
-        _personData.value = Document("", "", "", count, count, "", "", "")
-        if (_personData.value == null) {
-            Logger.d("* * * _personData NULL")
-        }
-
+    fun addPersonImage() {
+        _personData.value =
+            Document("", "", "", 0, 0, "", "https://devvkkid.tistory.com/", "")
     }
 
     fun getImageSearch(query: String, page: Int, size: Int) {

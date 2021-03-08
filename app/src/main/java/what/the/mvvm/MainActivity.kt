@@ -61,7 +61,7 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
 
         // 클릭해서 아이템을 하나 늘려보자.
         binding.mainActivityAddButton.setOnClickListener {
-            viewModel.addPersonImage(count++)
+            viewModel.addPersonImage()
         }
     }
 
