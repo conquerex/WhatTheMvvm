@@ -39,6 +39,7 @@
                 android:drawableStart="@drawable/ic_search_black_24dp"
                 android:text="SEARCH"
                 android:textColor="@android:color/white" />
+
         </LinearLayout>
 
         <Button

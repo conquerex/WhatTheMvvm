@@ -20,15 +20,24 @@ class MainViewModel(private val model: DataModel) : BaseKotlinViewModel() {
 
     private val _imageSearchResponseLiveData = MutableLiveData<ArrayList<Document>>()
 
-    val personData = MutableLiveData<String>()
-
     val imageSearchResponseLiveData: LiveData<ArrayList<Document>>
         get() = _imageSearchResponseLiveData
 
-    fun addPersonImage() {
-        Logger.d("* * * addPersonImage")
+    private val _personData = MutableLiveData<Document>()
+
+    val personData: LiveData<Document>
+        get() = _personData
+
+    fun addPersonImage(count: Int) {
+        if (_personData.value == null) {
+            Logger.d("* * * _personData NULL")
+        }
+        Logger.d("* * * addPersonImage $count")
 //        personData.value = "https://devvkkid.tistory.com/"
-        _imageSearchResponseLiveData.value?.add(Document("", "", "", 0, 0, "", "", ""))
+        _personData.value = Document("", "", "", count, count, "", "", "")
+        if (_personData.value == null) {
+            Logger.d("* * * _personData NULL")
+        }
 
     }
 
