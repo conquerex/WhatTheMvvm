@@ -22,6 +22,15 @@ class MainViewModel(private val model: DataModel) : BaseKotlinViewModel() {
     val imageSearchResponseLiveData: LiveData<ImageSearchResponse>
         get() = _imageSearchResponseLiveData
 
+    private val _imageAddLiveData = MutableLiveData<String>()
+
+    val imageAddLiveData: LiveData<String>
+        get() = _imageAddLiveData
+
+    fun addPersonImage() {
+        _imageAddLiveData.postValue("https://devvkkid.tistory.com/")
+    }
+
     fun getImageSearch(query: String, page: Int, size: Int) {
         addDisposable(
             model.getData(query, KakaoSearchSortEnum.Accuracy, page, size)

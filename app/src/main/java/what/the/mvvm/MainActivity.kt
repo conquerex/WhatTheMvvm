@@ -1,6 +1,8 @@
 package what.the.mvvm
 
-import androidx.lifecycle.Observer
+import android.view.inputmethod.InputMethodManager
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,8 +21,11 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
 
     private val mainSearchRecyclerViewAdapter: MainSearchRecyclerViewAdapter by inject()
 
+    lateinit var imm: InputMethodManager
+
     override fun initStartView() {
-        binding.mainActivitySearchTextView.setText("코틀린 프로그래밍 쿡북")
+        imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.mainActivitySearchTextView.setText("first preview of Android 11")
         binding.mainActivitySearchRecyclerView.run {
             adapter = mainSearchRecyclerViewAdapter
             layoutManager = StaggeredGridLayoutManager(3, 1).apply {
@@ -31,8 +36,18 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
+    @BindingAdapter("bindData")
+    fun bindRecyclerView(
+        recyclerView: RecyclerView,
+        data: String
+    ) {
+        mainSearchRecyclerViewAdapter.addPersonItem(data)
+        mainSearchRecyclerViewAdapter.notifyDataSetChanged()
+    }
+
     override fun initDataBinding() {
-        viewModel.imageSearchResponseLiveData.observe(this, Observer {
+        viewModel.imageSearchResponseLiveData.observe(this, {
+            mainSearchRecyclerViewAdapter.clearList()
             it.documents.forEach { document ->
                 mainSearchRecyclerViewAdapter.addImageItem(document.image_url, document.doc_url)
             }
@@ -42,7 +57,14 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initAfterBinding() {
         binding.mainActivitySearchButton.setOnClickListener {
+            imm.hideSoftInputFromWindow(binding.mainActivitySearchTextView.windowToken, 0)
             viewModel.getImageSearch(binding.mainActivitySearchTextView.text.toString(), 1, 80)
         }
+
+        binding.mainActivityAddButton.setOnClickListener {
+            viewModel.addPersonImage()
+        }
     }
+
+
 }
