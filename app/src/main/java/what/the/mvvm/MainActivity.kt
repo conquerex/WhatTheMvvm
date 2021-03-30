@@ -1,11 +1,13 @@
 package what.the.mvvm
 
+import android.content.Intent
 import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import what.the.mvvm.base.BaseKotlinActivity
 import what.the.mvvm.databinding.ActivityMainBinding
+import what.the.mvvm.practice.PracticeActivity
 import what.the.mvvm.viewmodel.MainViewModel
 
 class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
@@ -58,6 +60,10 @@ class MainActivity : BaseKotlinActivity<ActivityMainBinding, MainViewModel>() {
         // 클릭해서 아이템을 하나 늘려보자.
         binding.mainActivityAddButton.setOnClickListener {
             viewModel.addPersonImage()
+        }
+
+        binding.mainActivityStartPractice.setOnClickListener {
+            startActivity(Intent(this, PracticeActivity::class.java))
         }
     }
 

@@ -91,5 +91,4 @@ dependencies {
 
     // 3rd party
     implementation "com.github.skydoves:expandablelayout:1.0.6"
-    implementation "com.github.cachapa:ExpandableLayout:2.9.2"
 }
