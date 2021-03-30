@@ -66,6 +66,7 @@ dependencies {
     // koin
     implementation "org.koin:koin-androidx-scope:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.koin:koin-test:$koinVersion"
 
     // picasso
@@ -87,4 +88,8 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$testExtJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    // 3rd party
+    implementation "com.github.skydoves:expandablelayout:1.0.6"
+    implementation "com.github.cachapa:ExpandableLayout:2.9.2"
 }
