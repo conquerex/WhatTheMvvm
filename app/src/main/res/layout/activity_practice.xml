@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            app:expandable_animation="bounce"
+            app:expandable_animation="accelerate"
             app:expandable_duration="300"
             app:expandable_isExpanded="false"
             app:expandable_parentLayout="@layout/layout_parent"
