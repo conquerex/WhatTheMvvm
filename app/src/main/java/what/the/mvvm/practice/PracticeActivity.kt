@@ -16,6 +16,7 @@ class PracticeActivity : AppCompatActivity() {
 
         val sampleText = "<img src=\"https://sfn-static-resources.s3.ap-northeast-2.amazonaws.com/public/20210326/1616736482113_detail1-1.png\" alt=\"image\" style=\"max-width: 100%;\"><img src=\"https://sfn-static-resources.s3.ap-northeast-2.amazonaws.com/public/20210326/1616736487014_detail1-2.png\" alt=\"image\" style=\"max-width: 100%;\"><img src=\"https://sfn-static-resources.s3.ap-northeast-2.amazonaws.com/public/20210326/1616736494844_detail1-3.png\" alt=\"image\" style=\"max-width: 100%;\"><img src=\"https://sfn-static-resources.s3.ap-northeast-2.amazonaws.com/public/20210326/1616736502606_detail1-4.png\" alt=\"image\" style=\"max-width: 100%;\"><img src=\"https://sfn-static-resources.s3.ap-northeast-2.amazonaws.com/public/20210326/1616736511190_detail1-5.png\" alt=\"image\" style=\"max-width: 100%;\"><img src=\"https://sfn-static-resources.s3.ap-northeast-2.amazonaws.com/public/20210326/1616736517680_detail1-6.png\" alt=\"image\" style=\"max-width: 100%;\"><br>"
 
+        // skydoves:expandablelayout 사용 부분
         with(binding) {
             expandable.setOnExpandListener {
                 if (it) {
