@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomEditText">
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">#4CAF50</item>
+        <item name="android:textColorHighlight">#E91E63</item>
+    </style>
+
+</resources>

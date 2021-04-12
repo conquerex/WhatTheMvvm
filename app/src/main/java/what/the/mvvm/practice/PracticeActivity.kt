@@ -2,13 +2,19 @@ package what.the.mvvm.practice
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputType
+import android.text.TextWatcher
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import what.the.mvvm.R
 import what.the.mvvm.databinding.ActivityPracticeBinding
+import what.the.mvvm.util.CustomEditTextWrapper
 import what.the.mvvm.util.ToggleAnimation
 
 class PracticeActivity : AppCompatActivity() {
@@ -16,7 +22,6 @@ class PracticeActivity : AppCompatActivity() {
     var isExpanded = false
 
     private fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: LinearLayout): Boolean {
-        // 2
         ToggleAnimation.toggleArrow(view, isExpanded)
         if (isExpanded) {
             ToggleAnimation.expand(layoutExpand)
@@ -30,6 +35,40 @@ class PracticeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityPracticeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ///////////////////////////////////
+        /////   Custom Edit Text    ///////
+        ///////////////////////////////////
+
+        binding.customEditText.bindConfig(
+            CustomEditTextWrapper.Config(
+                hintText = "비밀번호",
+                focusedUnderlineColor = ContextCompat.getColor(this, R.color.khaki_8),
+                unfocusedUnderlineColor = ContextCompat.getColor(this, R.color.login_gray),
+                focusedFloatingLabelColor = ContextCompat.getColor(this, R.color.login_gray),
+                unfocusedHintColor = ContextCompat.getColor(this, R.color.login_gray),
+                textColor = ContextCompat.getColor(this, R.color.black),
+                inputTypes = mutableListOf(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+            )
+        )
+
+        binding.customEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // nothing
+            }
+            override fun afterTextChanged(s: Editable?) {
+                // nothing
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val msg = "s : $s\nstart : $start\nbefore : $before\ncount : $count"
+                Toast.makeText(this@PracticeActivity, msg, Toast.LENGTH_LONG).show()
+            }
+        })
+
+
+        ///////////////////////////////////
+        /////   Expandable layout   ///////
+        ///////////////////////////////////
 
         binding.imgMore1.setOnClickListener {
             if (binding.layoutExpand1.visibility == View.VISIBLE) {
