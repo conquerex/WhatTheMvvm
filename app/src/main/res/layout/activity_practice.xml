@@ -14,6 +14,15 @@
             android:orientation="vertical"
             tools:context=".practice.PracticeActivity">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <what.the.mvvm.util.CustomEditTextWrapper
+                android:id="@+id/custom_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
